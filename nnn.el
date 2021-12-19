@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;; Copyright (C) 2021 by HackTheOxidation
 ;; Author: HackTheoxidation
-;; URL:
+;; URL: https://github.com/HackTheOxidation/nnn.el
 ;; Filename: nnn.el
 ;; Description: nnn plugin for your emacs
 ;; Created: 2021-12-18
@@ -50,11 +50,6 @@
 
 (defconst nnn/buffer-name "*nnn*"
   "Buffer name for nnn session.")
-
-(defcustom nnn/initial-directory nil
-  "The directory in which nnn will start up."
-  :type 'string
-  :group 'nnn)
 
 ;; Exit handler function that is called when the nnn process is killed.
 (defun nnn/on-nnn-exit-handler (process status)
