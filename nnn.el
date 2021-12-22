@@ -64,9 +64,11 @@
   "Run nnn in a new term buffer."
   (require 'term) ;; Imports terminal emulator functionality.
 
+  (unless (get-buffer nnn/buffer-name)
   (let* ((buf (get-buffer-create nnn/buffer-name))) ;; Creates a buffer for nnn.
     (make-term nnn/exe "sh" nil "-c" nnn/exe) ;; Opens a term and executes nnn.
-    (switch-to-buffer buf)
+    (switch-to-buffer buf))
+  (switch-to-buffer nnn/buffer-name))
     (and (fboundp #'turn-off-evil-mode) (turn-off-evil-mode)) ;; Turns off evil-mode if installed.
     (linum-mode 0)
     (visual-line-mode 0)
@@ -74,7 +76,7 @@
 
     ; Adds the exit handler function to term-handle-exit which is called when the process is killed.
     (advice-add 'term-handle-exit :after 'nnn/on-nnn-exit-handler)
-    (message "NNN")))
+    (message "NNN"))
 
 ;;;###autoload
 (defun nnn ()
