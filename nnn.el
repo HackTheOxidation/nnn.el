@@ -1,13 +1,13 @@
-;;; nnn.el --- nnn plugin for your emacs.
+;;; nnn.el --- nnn plugin for your emacs
 ;;; Commentary:
 ;; Copyright (C) 2021 by HackTheOxidation
 ;; Author: HackTheoxidation
 ;; URL: https://github.com/HackTheOxidation/nnn.el
 ;; Filename: nnn.el
-;; Description: nnn plugin for your emacs
+;; Description: nnn plugin for your Emacs
 ;; Created: 2021-12-18
 ;; Version: 0.0.1
-;; Package-Requires: ((emacs "26.0"))
+;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: nnn filemanager dired
 ;;
 ;; This file is not part of GNU Emacs.
@@ -43,32 +43,32 @@
   "Options for nnn.el"
   :group 'convenience)
 
-(defcustom nnn/exe "nnn"
+(defcustom nnn-exe "nnn"
   "Path to nnn."
   :type 'string
   :group 'nnn)
 
-(defconst nnn/buffer-name "*nnn*"
+(defconst nnn-buffer-name "*nnn*"
   "Buffer name for nnn session.")
 
 ;; Exit handler function that is called when the nnn process is killed.
-(defun nnn/on-nnn-exit-handler (process status)
+(defun nnn-on-nnn-exit-handler (process status)
   "Kill the buffer when nnn exits.  Print PROCESS and STATUS to the message buffer."
-  (kill-buffer nnn/buffer-name)
+  (kill-buffer nnn-buffer-name)
   (message (format "%s: %s" process status))
   ;; Removes the exit handler function so that it does not get called recursively.
   (advice-remove 'term-handle-exit 'nnn/on-nnn-exit-handler))
 
 ;; Default run function.
-(defun nnn/run ()
+(defun nnn-run ()
   "Run nnn in a new term buffer."
   (require 'term) ;; Imports terminal emulator functionality.
 
-  (unless (get-buffer nnn/buffer-name)
-  (let* ((buf (get-buffer-create nnn/buffer-name))) ;; Creates a buffer for nnn.
-    (make-term nnn/exe "sh" nil "-c" nnn/exe) ;; Opens a term and executes nnn.
+  (unless (get-buffer nnn-buffer-name)
+  (let* ((buf (get-buffer-create nnn-buffer-name))) ;; Creates a buffer for nnn.
+    (make-term nnn-exe "sh" nil "-c" nnn-exe) ;; Opens a term and executes nnn.
     (switch-to-buffer buf))
-  (switch-to-buffer nnn/buffer-name))
+  (switch-to-buffer nnn-buffer-name))
     (and (fboundp #'turn-off-evil-mode) (turn-off-evil-mode)) ;; Turns off evil-mode if installed.
     (linum-mode 0)
     (visual-line-mode 0)
@@ -82,7 +82,7 @@
 (defun nnn ()
   "Run an nnn session."
   (interactive)
-  (nnn/run))
+  (nnn-run))
 
 (provide 'nnn)
 
