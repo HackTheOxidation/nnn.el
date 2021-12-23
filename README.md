@@ -6,7 +6,7 @@ It can serve as an alternative to dired.
 
 ## Installation
 
-nnn.el can be installed through [MELPA](https://melpa.org).
+Add a file called `nnn` to your recipes directory.
 
 It requires that you have `nnn` installed on your system.
 See [Usage](https://github.com/jarun/nnn/wiki/Usage) on nnn's own wiki.
