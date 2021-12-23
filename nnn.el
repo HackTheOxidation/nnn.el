@@ -1,14 +1,15 @@
-;;; nnn.el --- nnn plugin for your emacs
+;;; nnn.el --- An nnn plugin for your favorite editor
+;;
 ;;; Commentary:
 ;; Copyright (C) 2021 by HackTheOxidation
 ;; Author: HackTheoxidation
 ;; URL: https://github.com/HackTheOxidation/nnn.el
 ;; Filename: nnn.el
-;; Description: nnn plugin for your Emacs
+;; Description: nnn plugin that allows using nnn inside term mode
 ;; Created: 2021-12-18
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "24.4"))
-;; Keywords: nnn filemanager dired
+;; Keywords: files convenience
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -55,9 +56,9 @@
 (defun nnn-on-nnn-exit-handler (process status)
   "Kill the buffer when nnn exits.  Print PROCESS and STATUS to the message buffer."
   (kill-buffer nnn-buffer-name)
-  (message (format "%s: %s" process status))
+  (message "%s: %s" process status)
   ;; Removes the exit handler function so that it does not get called recursively.
-  (advice-remove 'term-handle-exit 'nnn/on-nnn-exit-handler))
+  (advice-remove 'term-handle-exit #'nnn-on-nnn-exit-handler))
 
 ;; Default run function.
 (defun nnn-run ()
@@ -75,7 +76,7 @@
     (term-char-mode)
 
     ; Adds the exit handler function to term-handle-exit which is called when the process is killed.
-    (advice-add 'term-handle-exit :after 'nnn/on-nnn-exit-handler)
+    (advice-add 'term-handle-exit :after #'nnn-on-nnn-exit-handler)
     (message "NNN"))
 
 ;;;###autoload
