@@ -5,7 +5,7 @@
 ;; Author: HackTheoxidation
 ;; URL: https://github.com/HackTheOxidation/nnn.el
 ;; Filename: nnn.el
-;; Description: nnn plugin that allows using nnn inside term mode
+;; Description: nnn plugin that allows you to use nnn inside term mode
 ;; Created: 2021-12-18
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "24.4"))
